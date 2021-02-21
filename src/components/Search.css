@@ -1,0 +1,34 @@
+.search {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.search__input {
+    border: none;
+    border-bottom: 3px solid rgb(9, 44, 139);
+    width: 250px;
+    height: 40px;
+    font-size: 28px;
+    color: rgb(9, 44, 139);
+    outline: none;
+}
+
+.search__button {
+    height: 32px;
+    width: 100px;
+    border: none;
+    background-color: rgb(9, 44, 139);
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    outline: none;
+    font-size: 15px;
+}
+
+.search__button:hover {
+    background-color: rgb(9, 39, 121);
+}
+
+.search__button:focus {
+    background-color: rgb(8, 32, 97);
+}
