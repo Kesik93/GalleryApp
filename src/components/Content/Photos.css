@@ -1,0 +1,11 @@
+
+
+.photos {
+    display: grid;
+    grid-gap: 1rem;
+    padding: 1rem;
+    max-width: 1024px;
+    margin: 0 auto;
+    grid-template-columns: repeat(3, 1fr);
+
+}

@@ -3,7 +3,7 @@ import Photos from './components/Content/Photos';
 
 function App() {
   return (
-    <div>
+    <div className='content'>
       <Search />
       <Photos />
     </div>

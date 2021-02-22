@@ -1,10 +1,19 @@
 import React from 'react';
+import Photo from './Photo';
 import './Photos.css';
 
 function Photos() {
     return (
-        <div>
-            <h2>Test photos komponent</h2>
+        <div className='photos'>
+            <Photo />
+            <Photo />
+            <Photo />
+            <Photo />
+            <Photo />
+            <Photo />
+            <Photo />
+            <Photo />
+            <Photo />
         </div>
     )
 }
