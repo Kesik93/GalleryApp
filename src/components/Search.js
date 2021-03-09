@@ -11,7 +11,7 @@ function Search() {
     return (
         <div className='search'>
             <form onSubmit={handleSubmit}>
-                <FontAwesomeIcon icon={faSearch} className='search_icon'/>
+                <FontAwesomeIcon icon={faSearch} className='search__icon'/>
                 <input className='search__input' type="text" placeholder="Type something..." />
                 <button className='search__button'>Search</button>
             </form>

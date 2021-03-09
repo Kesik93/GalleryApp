@@ -7,12 +7,17 @@ import { faThumbsUp, faArrowAltCircleDown, faEye } from '@fortawesome/free-solid
 function Photo() {
     return (
         <div className='photo'>
-            <img src={photo} className='photo-img'/>
+            <img src={photo} className='photo__img'/>
             <h3>Description</h3>
-            <div>
-                <FontAwesomeIcon icon={faThumbsUp} className='photo_icon'/>1234
-                <FontAwesomeIcon icon={faArrowAltCircleDown} className='photo_icon'/>231
-                <FontAwesomeIcon icon={faEye} className='photo_icon'/>4322  
+            <div className='photo__icons'>
+                <FontAwesomeIcon icon={faThumbsUp} className='photo__icon'/>1234
+                <FontAwesomeIcon icon={faArrowAltCircleDown} className='photo__icon'/>231
+                <FontAwesomeIcon icon={faEye} className='photo__icon'/>4322  
+            </div>
+            <div className="photo__tags">
+                <button className='photo__tagButton'>#cat</button>
+                <button className='photo__tagButton'>#pet</button>
+                <button className='photo__tagButton'>#animal</button>
             </div>
         </div>
     )

@@ -3,7 +3,7 @@
     margin-top: 50px;
 }
 
-.search_icon {
+.search__icon {
     margin-right: 10px;
     color: rgb(9, 44, 139);
     font-size: 25px;
@@ -40,4 +40,10 @@
 
 .search__button:focus {
     background-color: rgb(8, 32, 97);
+}
+
+@media (max-width: 450px) {
+    .search__button {
+        margin-top: 10px;
+    }
 }
