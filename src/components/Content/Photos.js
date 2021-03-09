@@ -7,7 +7,7 @@ function Photos() {
     const [result, setResult] = useState([]);
 
     useEffect(() => {
-        fetchPhoto('dog')
+        fetchPhoto('cat') //TODO do zahardkodowania
         .then(data => {
             setResult(data.results);
         })
@@ -17,7 +17,7 @@ function Photos() {
         <div className='photos'>
             {result.map((results) => (
                     <div>
-                        <Photo photo={results.urls.small}/>
+                        <Photo photo={results}/>
                     </div>
                 ))}
         </div>

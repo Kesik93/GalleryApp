@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Photo.css';
-//import photo from './../../example.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faArrowAltCircleDown, faEye } from '@fortawesome/free-solid-svg-icons';
+import fetchStatistics from '../../api/fetchStatistics';
 
 function Photo(props) {
+    const [stats, setStats] = useState([]);
+
+    const statistics = fetchStatistics(props.photo.id)
+        .then(data => {
+            console.log(data)
+        })
+
     return (
         <div className='photo'>
-            <img src={props.photo} className='photo__img'/>
-            <h3>Description</h3>
+            <img src={props.photo.urls.small} className='photo__img'/>
+            <h3>{props.photo.description}</h3>
             <div className='photo__icons'>
-                <FontAwesomeIcon icon={faThumbsUp} className='photo__icon'/>1234
-                <FontAwesomeIcon icon={faArrowAltCircleDown} className='photo__icon'/>231
-                <FontAwesomeIcon icon={faEye} className='photo__icon'/>4322  
+                <FontAwesomeIcon icon={faThumbsUp} className='photo__icon'/>{props.photo.likes} 
+                <FontAwesomeIcon icon={faArrowAltCircleDown} className='photo__icon'/>{props.photo.downloads}
+                <FontAwesomeIcon icon={faEye} className='photo__icon'/>
             </div>
             <div className="photo__tags">
                 <button className='photo__tagButton'>#cat</button>
