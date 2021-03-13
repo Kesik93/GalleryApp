@@ -5,21 +5,33 @@ import { faThumbsUp, faArrowAltCircleDown, faEye } from '@fortawesome/free-solid
 import fetchStatistics from '../../api/fetchStatistics';
 
 function Photo(props) {
-    const [stats, setStats] = useState([]);
+    const [stats, setStats] = useState({
+        download: 0,
+        view: 0,
+        like: 0,
+    });
 
-    const statistics = fetchStatistics(props.photo.id)
-        .then(data => {
-            console.log(data)
-        })
+    useEffect(() => { 
+        fetchStatistics(props.photo.id)
+            .then(data => {
+                console.log(data);
+                setStats({...stats, 
+                    download: data.downloads.total,
+                    view: data.views.total,
+                    like: data.likes.total,
+                });
+                
+            })
+    });
 
     return (
         <div className='photo'>
             <img src={props.photo.urls.small} className='photo__img'/>
             <h3>{props.photo.description}</h3>
             <div className='photo__icons'>
-                <FontAwesomeIcon icon={faThumbsUp} className='photo__icon'/>{props.photo.likes} 
-                <FontAwesomeIcon icon={faArrowAltCircleDown} className='photo__icon'/>{props.photo.downloads}
-                <FontAwesomeIcon icon={faEye} className='photo__icon'/>
+                <FontAwesomeIcon icon={faThumbsUp} className='photo__icon'/>{stats.like}
+                <FontAwesomeIcon icon={faArrowAltCircleDown} className='photo__icon'/>{stats.download}
+                <FontAwesomeIcon icon={faEye} className='photo__icon'/>{stats.view}
             </div>
             <div className="photo__tags">
                 <button className='photo__tagButton'>#cat</button>

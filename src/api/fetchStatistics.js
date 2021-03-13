@@ -1,6 +1,6 @@
 import apiUnsplash from './apiUnsplash';
 
 const fetchStatistics = (id) =>
-    apiUnsplash(`/photos?id=${id}/statistics`) //TODO: sprawdzić czy to w ogole działa
+    apiUnsplash(`/photos/${id}/statistics`)
 
 export default fetchStatistics;
