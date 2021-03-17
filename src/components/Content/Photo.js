@@ -17,7 +17,6 @@ function Photo(props) {
     useEffect(() => { 
         fetchStatistics(props.photo.id)
             .then(statsData => {
-                console.log(statsData)
                 setStats({...stats, 
                     download: statsData.downloads.total,
                     view: statsData.views.total,
@@ -31,11 +30,11 @@ function Photo(props) {
                     setTags(dataTags.tags);
                 }
             })
-    });
+    }, []);
 
     return (
         <div className='photo'>
-            <img src={props.photo.urls.small} className='photo__img' alt='photo'/>
+            <img src={props.photo.urls.small} className='photo__img' key={props.photo.id} alt={props.photo.id}/>
             <h3>{props.photo.description}</h3>
             <div className='photo__icons'>
                 <FontAwesomeIcon icon={faThumbsUp} className='photo__icon'/>{stats.like}
@@ -44,7 +43,7 @@ function Photo(props) {
             </div>
             <div className="photo__tags">
                 {tags.slice(0, 3).map((item) => (
-                    <button className='photo__tagButton'>#{item?.title}</button>
+                    <button className='photo__tagButton' key={item.title}>#{item?.title}</button>
                 ))}
             </div>
         </div>

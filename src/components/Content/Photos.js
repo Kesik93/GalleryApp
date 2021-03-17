@@ -11,13 +11,13 @@ function Photos() {
         .then(data => {
             setResult(data.results);
         })
-    });
+    }, []);
 
     return (
         <div className='photos'>
-            {result.map((results) => (
-                    <div>
-                        <Photo photo={results}/>
+            {result.map((singlePhoto) => (
+                    <div key={singlePhoto.id}>
+                        <Photo photo={singlePhoto}/>
                     </div>
                 ))}
         </div>
