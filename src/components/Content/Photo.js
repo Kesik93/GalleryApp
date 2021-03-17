@@ -3,6 +3,8 @@ import './Photo.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsUp, faArrowAltCircleDown, faEye } from '@fortawesome/free-solid-svg-icons';
 import fetchStatistics from '../../api/fetchStatistics';
+import fetchPhotoTags from '../../api/fetchPhotoTags';
+
 
 function Photo(props) {
     const [stats, setStats] = useState({
@@ -10,23 +12,30 @@ function Photo(props) {
         view: 0,
         like: 0,
     });
+    const [tags, setTags] = useState([])
 
     useEffect(() => { 
         fetchStatistics(props.photo.id)
-            .then(data => {
-                console.log(data);
+            .then(statsData => {
+                console.log(statsData)
                 setStats({...stats, 
-                    download: data.downloads.total,
-                    view: data.views.total,
-                    like: data.likes.total,
+                    download: statsData.downloads.total,
+                    view: statsData.views.total,
+                    like: statsData.likes.total,
                 });
-                
+            });
+
+        fetchPhotoTags(props.photo.id)
+            .then(dataTags => {
+                if(dataTags.tags.length > 0) {
+                    setTags(dataTags.tags);
+                }
             })
     });
 
     return (
         <div className='photo'>
-            <img src={props.photo.urls.small} className='photo__img'/>
+            <img src={props.photo.urls.small} className='photo__img' alt='photo'/>
             <h3>{props.photo.description}</h3>
             <div className='photo__icons'>
                 <FontAwesomeIcon icon={faThumbsUp} className='photo__icon'/>{stats.like}
@@ -34,9 +43,9 @@ function Photo(props) {
                 <FontAwesomeIcon icon={faEye} className='photo__icon'/>{stats.view}
             </div>
             <div className="photo__tags">
-                <button className='photo__tagButton'>#cat</button>
-                <button className='photo__tagButton'>#pet</button>
-                <button className='photo__tagButton'>#animal</button>
+                {tags.slice(0, 3).map((item) => (
+                    <button className='photo__tagButton'>#{item?.title}</button>
+                ))}
             </div>
         </div>
     )
