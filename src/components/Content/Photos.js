@@ -3,11 +3,11 @@ import Photo from './Photo';
 import './Photos.css';
 import fetchPhoto from '../../api/fetchPhoto';
 
-function Photos() {
+function Photos(props) {
     const [result, setResult] = useState([]);
 
     useEffect(() => {
-        fetchPhoto('cat') //TODO do zahardkodowania
+        fetchPhoto(props.text)
         .then(data => {
             setResult(data.results);
         })
