@@ -1,21 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Photo from './Photo';
 import './Photos.css';
-import fetchPhoto from '../../api/fetchPhoto';
 
-function Photos(props) {
-    const [result, setResult] = useState([]);
-
-    useEffect(() => {
-        fetchPhoto(props.text)
-        .then(data => {
-            setResult(data.results);
-        })
-    }, []);
-
+function Photos( {results} ) {
     return (
         <div className='photos'>
-            {result.map((singlePhoto) => (
+            {results.map((singlePhoto) => (
                     <div key={singlePhoto.id}>
                         <Photo photo={singlePhoto}/>
                     </div>

@@ -3,16 +3,21 @@ import './Search.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
-function Search({query, handleQuery, handleSubmit}) {
-    //const [query, setQuery] = useState('');
+function Search(props) {
+    const { 
+        onSearch 
+    } = props;
 
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    // }
+    const [query, setQuery] = useState('');
 
-    // const handleQuery = event => {
-    //     setQuery(event.target.value);
-    // };
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        onSearch(query);
+    }
+
+    const handleQuery = (event) => {
+        setQuery(event.target.value);
+    };
 
     return (
         <div className='search'>

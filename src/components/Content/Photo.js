@@ -5,7 +5,6 @@ import { faThumbsUp, faArrowAltCircleDown, faEye } from '@fortawesome/free-solid
 import fetchStatistics from '../../api/fetchStatistics';
 import fetchPhotoTags from '../../api/fetchPhotoTags';
 
-
 function Photo(props) {
     const [stats, setStats] = useState({
         download: 0,
