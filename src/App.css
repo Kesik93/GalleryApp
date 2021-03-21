@@ -1,5 +1,12 @@
 .content {
     display: grid;
     place-items: center;
+}
 
+.content__text {
+    display: flex;
+    text-align: center;
+    font-size: 24px;
+    margin: 15px 10px;
+    font-weight: 500;
 }
