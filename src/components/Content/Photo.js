@@ -34,7 +34,7 @@ function Photo(props) {
     return (
         <div className='photo'>
             <img src={props.photo.urls.small} className='photo__img' key={props.photo.id} alt={props.photo.id}/>
-            <h3>{props.photo.description || 'photo'}</h3>
+            <h3>{props.photo.description || props.searchingText}</h3>
             <div className='photo__icons'>
                 <FontAwesomeIcon icon={faThumbsUp} className='photo__icon'/>{stats.like}
                 <FontAwesomeIcon icon={faArrowAltCircleDown} className='photo__icon'/>{stats.download}
@@ -43,7 +43,7 @@ function Photo(props) {
             <div className="photo__tags">
                 {tags.length > 0 ? (tags.slice(0, 3).map((item) => (
                     <button className='photo__tagButton' key={item.title}>#{item.title}</button>
-                ))) : <button className='photo__tagButton' key='test'>#test</button>}
+                ))) : <button className='photo__tagButton' key='test'>#{props.searchingText}</button>}
             </div>
         </div>
     )

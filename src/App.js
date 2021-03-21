@@ -5,22 +5,23 @@ import fetchPhoto from './api/fetchPhoto';
 
 function App() {
   const [state, setState]  = useState({
-    results: []
+    results: [],
+    searchingText: '',
   });
 
   const onSearch = async (text) => {
     const results = await fetchPhoto(text)
-    .then(data => {
-      setState(prevState => {
-        return { ...prevState, results: data.results }
+      .then(data => {
+        setState(prevState => {
+          return { ...prevState, results: data.results, searchingText: text }
+        });
       });
-    })
   };
 
   return (
     <div className='content'>
       <Search onSearch={onSearch} />
-      <Photos results={state.results}/>
+      <Photos results={state.results} searchingText={state.searchingText}/>
     </div>
   );
 }
