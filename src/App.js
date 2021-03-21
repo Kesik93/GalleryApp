@@ -4,6 +4,7 @@ import Photos from './components/Content/Photos';
 import fetchPhoto from './api/fetchPhoto';
 //import fetchRandomPhoto from './api/fetchRandomPhoto';
 import './App.css';
+import FullScreenPhoto from './components/Content/FullScreenPhoto';
 
 function App() {
   const [state, setState] = useState({
@@ -11,7 +12,7 @@ function App() {
     searchingText: '',
     searchingTimes: 0,
   });
-
+  const [selectedImg, setSelectedImg] = useState(null);
   //const [random, setRandom] = useState([]);
 
   const onSearch = async (text) => {
@@ -34,10 +35,7 @@ function App() {
   //     })
   // }
 
-  //Tutaj może jakaś poprawka??? Jak rzuca błędem 403 od API to dalej są te same fotki 
   const informationText = () => {
-    console.log(state.searchingTimes);
-
     const infoText = state.searchingTimes === 0 ? 
       'Enter what you would like to find. Enjoy :)' : 'Sorry, there are no such photos in our database';
 
@@ -45,12 +43,15 @@ function App() {
   }
 
   return (
-    <div className='content'>
-      <Search onSearch={onSearch} />
-      {(state.results && state.results.length > 0) ? 
-        <Photos results={state.results} searchingText={state.searchingText}/> : informationText()
-      }
-    </div>
+    <>
+      <div className='content'>
+        <Search onSearch={onSearch} />
+        {(state.results && state.results.length > 0) ? 
+          <Photos results={state.results} searchingText={state.searchingText} setSelectedImg={setSelectedImg}/> : informationText()
+        }
+      </div>
+      {selectedImg && <FullScreenPhoto selectedImg={selectedImg} setSelectedImg={setSelectedImg}/> }
+    </>
   );
 }
 

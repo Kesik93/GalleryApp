@@ -12,7 +12,8 @@
 .photo__img {
     width: 300px;
     height: 300px;
-    object-fit: cover; 
+    object-fit: cover;
+    cursor: pointer;
 }
 
 .photo__icon {

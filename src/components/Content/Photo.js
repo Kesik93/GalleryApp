@@ -5,7 +5,7 @@ import { faThumbsUp, faArrowAltCircleDown, faEye } from '@fortawesome/free-solid
 import fetchStatistics from '../../api/fetchStatistics';
 import fetchPhotoTags from '../../api/fetchPhotoTags';
 
-function Photo(props) {
+function Photo( { photo, searchingText, setSelectedImg } ) {
     const [stats, setStats] = useState({
         download: 0,
         view: 0,
@@ -14,7 +14,7 @@ function Photo(props) {
     const [tags, setTags] = useState([])
 
     useEffect(() => { 
-        fetchStatistics(props.photo.id)
+        fetchStatistics(photo.id)
             .then(statsData => {
                 setStats({...stats, 
                     download: statsData.downloads.total,
@@ -23,7 +23,7 @@ function Photo(props) {
                 });
             });
 
-        fetchPhotoTags(props.photo.id)
+        fetchPhotoTags(photo.id)
             .then(dataTags => {
                 if(dataTags.tags.length > 0) {
                     setTags(dataTags.tags);
@@ -33,8 +33,12 @@ function Photo(props) {
 
     return (
         <div className='photo'>
-            <img src={props.photo.urls.small} className='photo__img' key={props.photo.id} alt={props.photo.id}/>
-            <h3>{props.photo.description || props.searchingText}</h3>
+            <img src={photo.urls.small} 
+                className='photo__img' 
+                key={photo.id} 
+                alt={photo.id}
+                onClick={() => setSelectedImg(photo.urls.full)}/>
+            <h3>{photo.description || searchingText}</h3>
             <div className='photo__icons'>
                 <FontAwesomeIcon icon={faThumbsUp} className='photo__icon'/>{stats.like}
                 <FontAwesomeIcon icon={faArrowAltCircleDown} className='photo__icon'/>{stats.download}
@@ -43,7 +47,7 @@ function Photo(props) {
             <div className="photo__tags">
                 {tags.length > 0 ? (tags.slice(0, 3).map((item) => (
                     <button className='photo__tagButton' key={item.title}>#{item.title}</button>
-                ))) : <button className='photo__tagButton' key='test'>#{props.searchingText}</button>}
+                ))) : <button className='photo__tagButton' key='test'>#{searchingText}</button>}
             </div>
         </div>
     )
