@@ -6,17 +6,17 @@ import fetchStatistics from '../../api/fetchStatistics';
 import fetchPhotoTags from '../../api/fetchPhotoTags';
 
 function Photo( { photo, searchingText, setSelectedImg } ) {
-    const [stats, setStats] = useState({
+    const [photoInfo, setPhotoInfo] = useState({
         download: 0,
         view: 0,
         like: 0,
+        tags: [],
     });
-    const [tags, setTags] = useState([])
 
     useEffect(() => { 
         fetchStatistics(photo.id)
             .then(statsData => {
-                setStats({...stats, 
+                setPhotoInfo({...photoInfo, 
                     download: statsData.downloads.total,
                     view: statsData.views.total,
                     like: statsData.likes.total,
@@ -26,7 +26,9 @@ function Photo( { photo, searchingText, setSelectedImg } ) {
         fetchPhotoTags(photo.id)
             .then(dataTags => {
                 if(dataTags.tags.length > 0) {
-                    setTags(dataTags.tags);
+                    setPhotoInfo({...photoInfo, 
+                        tags: dataTags.tags,
+                    });
                 }
             })
     }, []);
@@ -40,14 +42,14 @@ function Photo( { photo, searchingText, setSelectedImg } ) {
                 onClick={() => setSelectedImg(photo.urls.full)}/>
             <h3>{photo.description || searchingText}</h3>
             <div className='photo__icons'>
-                <FontAwesomeIcon icon={faThumbsUp} className='photo__icon'/>{stats.like}
-                <FontAwesomeIcon icon={faArrowAltCircleDown} className='photo__icon'/>{stats.download}
-                <FontAwesomeIcon icon={faEye} className='photo__icon'/>{stats.view}
+                <FontAwesomeIcon icon={faThumbsUp} className='photo__icon'/>{photoInfo.like}
+                <FontAwesomeIcon icon={faArrowAltCircleDown} className='photo__icon'/>{photoInfo.download}
+                <FontAwesomeIcon icon={faEye} className='photo__icon'/>{photoInfo.view}
             </div>
             <div className="photo__tags">
-                {tags.length > 0 ? (tags.slice(0, 3).map((item) => (
+                {photoInfo.tags.length > 0 ? (photoInfo.tags.slice(0, 3).map((item) => (
                     <button className='photo__tagButton' key={item.title}>#{item.title}</button>
-                ))) : <button className='photo__tagButton' key='test'>#{searchingText}</button>}
+                ))) : <button className='photo__tagButton' key='test'>#{searchingText || 'radom'}</button>}
             </div>
         </div>
     )

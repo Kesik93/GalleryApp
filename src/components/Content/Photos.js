@@ -1,8 +1,9 @@
 import React from 'react';
 import Photo from './Photo';
 import './Photos.css';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
-function Photos( {results, searchingText, setSelectedImg} ) {
+function Photos( {results, searchingText, setSelectedImg, onSearch} ) {
     return (
         <div className='photos'>
             {results.map((singlePhoto) => (
@@ -12,6 +13,6 @@ function Photos( {results, searchingText, setSelectedImg} ) {
             ))}
         </div>
     )
-}
+};
 
 export default Photos

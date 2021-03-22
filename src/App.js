@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Search from './components/Search';
 import Photos from './components/Content/Photos';
 import fetchPhoto from './api/fetchPhoto';
-//import fetchRandomPhoto from './api/fetchRandomPhoto';
+import fetchRandomPhoto from './api/fetchRandomPhoto';
 import './App.css';
 import FullScreenPhoto from './components/Content/FullScreenPhoto';
 
@@ -12,11 +12,11 @@ function App() {
     searchingText: '',
     searchingTimes: 0,
   });
-  const [selectedImg, setSelectedImg] = useState(null);
-  //const [random, setRandom] = useState([]);
+  const [selectedImg, setSelectedImg] = useState(null);  // to chyba da sie wrzucic w jednego state
+  const [random, setRandom] = useState([]); // to bedzie prawdopodobnie do usuniecia
 
   const onSearch = async (text) => {
-    const results = await fetchPhoto(text)
+    await fetchPhoto(text)
       .then((data) => {
         setState(prevState => {
           return { ...prevState, 
@@ -27,30 +27,38 @@ function App() {
       })
   };
 
-  // const websiteInitial = () => {
-  //   const random = fetchRandomPhoto()
-  //     .then(data => {
-  //       setRandom(data);
-  //       console.log(data)
-  //     })
-  // }
+  const getDefaultPhotos = async () => {
+    await fetchRandomPhoto()
+      .then(data => {
+        setState(prevState => {
+          return { ...prevState, 
+            results: data,
+        }})
+        console.log(data)
+      })
+  }
 
-  const informationText = () => {
-    const infoText = state.searchingTimes === 0 ? 
-      'Enter what you would like to find. Enjoy :)' : 'Sorry, there are no such photos in our database';
-
-    return <div className='content__text'>{infoText}</div>
+  const differentViewThanSearch = () => {
+    if(state.searchingTimes === 0) {
+      getDefaultPhotos();
+    } else {
+      return <div className='content__text'>Sorry, there are no such photos in our database</div>
+    }
   }
 
   return (
     <>
       <div className='content'>
-        <Search onSearch={onSearch} />
-        {(state.results && state.results.length > 0) ? 
-          <Photos results={state.results} searchingText={state.searchingText} setSelectedImg={setSelectedImg}/> : informationText()
+        <Search onSearch={onSearch}/>
+        {
+          (state.results && state.results.length > 0) ? 
+            <Photos results={state.results} 
+              searchingText={state.searchingText} 
+              setSelectedImg={setSelectedImg}/> 
+            : differentViewThanSearch()
         }
       </div>
-      {selectedImg && <FullScreenPhoto selectedImg={selectedImg} setSelectedImg={setSelectedImg}/> }
+      { selectedImg && <FullScreenPhoto selectedImg={selectedImg} setSelectedImg={setSelectedImg}/> }
     </>
   );
 }
