@@ -12,8 +12,7 @@ function App() {
     searchingText: '',
     searchingTimes: 0,
   });
-  const [selectedImg, setSelectedImg] = useState(null);  // to chyba da sie wrzucic w jednego state
-  const [random, setRandom] = useState([]); // to bedzie prawdopodobnie do usuniecia
+  const [selectedImg, setSelectedImg] = useState(null);  // to chyba da sie wrzucic w jednego state, pokombinować
 
   const onSearch = async (text) => {
     await fetchPhoto(text)
@@ -24,7 +23,7 @@ function App() {
             searchingText: text, 
             searchingTimes: state.searchingTimes +1}
         })
-      })
+    })
   };
 
   const getDefaultPhotos = async () => {
@@ -46,6 +45,10 @@ function App() {
     }
   }
 
+  function tagClick(tag) {
+    onSearch(tag);
+}
+
   return (
     <>
       <div className='content'>
@@ -53,8 +56,9 @@ function App() {
         {
           (state.results && state.results.length > 0) ? 
             <Photos results={state.results} 
-              searchingText={state.searchingText} 
-              setSelectedImg={setSelectedImg}/> 
+              searchingText={state.searchingText}
+              setSelectedImg={setSelectedImg}
+              tagClick={tagClick}/> 
             : differentViewThanSearch()
         }
       </div>

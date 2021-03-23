@@ -5,7 +5,7 @@ import { faThumbsUp, faArrowAltCircleDown, faEye } from '@fortawesome/free-solid
 import fetchStatistics from '../../api/fetchStatistics';
 import fetchPhotoTags from '../../api/fetchPhotoTags';
 
-function Photo( { photo, searchingText, setSelectedImg } ) {
+function Photo( { photo, searchingText, setSelectedImg, tagClick } ) {
     const [photoInfo, setPhotoInfo] = useState({
         download: 0,
         view: 0,
@@ -47,9 +47,23 @@ function Photo( { photo, searchingText, setSelectedImg } ) {
                 <FontAwesomeIcon icon={faEye} className='photo__icon'/>{photoInfo.view}
             </div>
             <div className="photo__tags">
-                {photoInfo.tags.length > 0 ? (photoInfo.tags.slice(0, 3).map((item) => (
-                    <button className='photo__tagButton' key={item.title}>#{item.title}</button>
-                ))) : <button className='photo__tagButton' key='test'>#{searchingText || 'radom'}</button>}
+                {
+                    photoInfo.tags.length > 0 ? 
+                    (photoInfo.tags.slice(0, 3).map((item) => (
+                        <button 
+                            className='photo__tagButton' 
+                            key={item.title} 
+                            onClick={() => tagClick(item.title)}>
+                                #{item.title}
+                        </button>
+                    ))) : 
+                        <button 
+                            className='photo__tagButton' 
+                            key='test' 
+                            onClick={() => tagClick(searchingText || 'random')}>
+                                #{searchingText || 'random'}
+                        </button>
+                }
             </div>
         </div>
     )
