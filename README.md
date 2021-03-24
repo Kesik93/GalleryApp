@@ -25,7 +25,7 @@ If you like the found photo and you want to see similar ones, click on the tag t
 Each photo has statistics: the number of likes, downloads and views. You can see them easily  
 ![Photo statistics](/screenshots/photoExampleStats.jpg)  
 
-* **Full screen photo**
+* **Full screen photo**  
 Click on the picture to see it in full screen
 ![Full screen photo](/screenshots/fullScreenPhoto.jpg) 
 
