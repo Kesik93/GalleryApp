@@ -19,8 +19,15 @@ function Search( { onSearch }) {
         <div className='search'>
             <form onSubmit={handleSubmit}>
                 <FontAwesomeIcon icon={faSearch} className='search__icon'/>
-                <input className='search__input' type="text" placeholder="Type something..." value={query} onChange={handleQuery} />
-                <button className='search__button'>Search</button>
+                <input 
+                    className='search__input' 
+                    type="text" 
+                    placeholder="Type something..." 
+                    value={query} 
+                    onChange={handleQuery} />
+                <button className='search__button'>
+                    Search
+                </button>
             </form>
         </div>
     )

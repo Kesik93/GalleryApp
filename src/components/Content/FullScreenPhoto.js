@@ -2,7 +2,7 @@ import React from 'react';
 import './FullScreenPhoto.css';
 
 function FullScreenPhoto({ selectedImg, setSelectedImg }) {
-    const handleClick = (event) => {
+    const handleClick = () => {
         setSelectedImg(null);
     }
     
@@ -11,6 +11,6 @@ function FullScreenPhoto({ selectedImg, setSelectedImg }) {
             <img src={selectedImg} alt="full screen"/>
         </div>
     )
-}
+};
 
-export default FullScreenPhoto
+export default FullScreenPhoto;

@@ -47,7 +47,7 @@ function Photo( { photo, searchingText, setSelectedImg, tagClick } ) {
                 <FontAwesomeIcon icon={faEye} className='photo__icon'/>{photoInfo.view}
             </div>
             <div className="photo__tags">
-                {
+                { 
                     photoInfo.tags.length > 0 ? 
                     (photoInfo.tags.slice(0, 3).map((item) => (
                         <button 
@@ -62,11 +62,11 @@ function Photo( { photo, searchingText, setSelectedImg, tagClick } ) {
                             key='test' 
                             onClick={() => tagClick(searchingText || 'random')}>
                                 #{searchingText || 'random'}
-                        </button>
+                        </button> 
                 }
             </div>
         </div>
     )
-}
+};
 
 export default Photo;

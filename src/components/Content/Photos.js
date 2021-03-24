@@ -10,6 +10,7 @@ function Photos( {results, searchingText, setSelectedImg, onSearch, tagClick} ) 
                 dataLength={results.length}
                 next={onSearch(searchingText)}
                 hasMore={true}
+                loader={<h4>Loading...</h4>}
             > */}
                 {results.map((singlePhoto) => (
                     <div className="photos__singlePhoto" key={singlePhoto.id} >

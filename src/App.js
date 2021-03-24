@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Search from './components/Search';
 import Photos from './components/Content/Photos';
 import fetchPhoto from './api/fetchPhoto';
@@ -21,7 +21,7 @@ function App() {
           return { ...prevState, 
             results: data.results, 
             searchingText: text, 
-            searchingTimes: state.searchingTimes +1}
+            searchingTimes: state.searchingTimes +1 }
         })
     })
   };
@@ -35,7 +35,7 @@ function App() {
         }})
         console.log(data)
       })
-  }
+  };
 
   const differentViewThanSearch = () => {
     if(state.searchingTimes === 0) {
@@ -43,11 +43,11 @@ function App() {
     } else {
       return <div className='content__text'>Sorry, there are no such photos in our database</div>
     }
-  }
+  };
 
   function tagClick(tag) {
     onSearch(tag);
-}
+  };
 
   return (
     <>
@@ -58,6 +58,7 @@ function App() {
             <Photos results={state.results} 
               searchingText={state.searchingText}
               setSelectedImg={setSelectedImg}
+              onSearch={onSearch}
               tagClick={tagClick}/> 
             : differentViewThanSearch()
         }
@@ -65,6 +66,6 @@ function App() {
       { selectedImg && <FullScreenPhoto selectedImg={selectedImg} setSelectedImg={setSelectedImg}/> }
     </>
   );
-}
+};
 
 export default App;

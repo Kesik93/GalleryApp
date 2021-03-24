@@ -1,6 +1,6 @@
 import apiUnsplash from './apiUnsplash';
 
 const fetchRandomPhoto = () =>
-    apiUnsplash(`/photos/random?count=9`)
+    apiUnsplash(`/photos/random?count=10`)
 
 export default fetchRandomPhoto;
